@@ -1,0 +1,53 @@
+﻿@page
+@model WebApplication1.Pages.Categories.AddCategoryModel
+
+@{
+    ViewData["Title"] = "AddCategory";
+}
+
+<body style="background-image: url('https://res.cloudinary.com/dxmsosoui/image/upload/v1697641274/vhszmrrgkdzdorvq4jxx.png');
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-position: center;
+                 width: 100%;
+                 opacity: 85%" ;>
+    
+    <br />
+
+    <div class="card mx-auto text-center" style="padding:20px; border-radius:20px;max-width:500px; align-content:center; margin:auto">
+        <h4 class=" display-5 fw-bold text-body-emphasis rounded text-center  p-3">Add new Category</h4>
+        @if (Model.errorMessage.Length > 0)
+        {
+            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                <strong>@Model.errorMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+        <form method="POST" enctype="multipart/form-data">
+            
+            
+            
+            <input class="form-control" style="border-radius:20px" asp-for="BookCategory.CategoryName" placeholder="Enter the category name" />
+            <span asp-validation-for="BookCategory.CategoryName" class="text-danger"></span>
+            <br />
+
+            <div class="row mb-3">
+                <div class="col d-grid">
+                    <button type="submit" class="btn btn-outline-primary" style="border-radius:20px" href="/Index">Add Category</button>
+                </div>
+                <div class="col d-grid">
+                    <a href="/" style="border-radius:20px" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+</body>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

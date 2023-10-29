@@ -1,0 +1,69 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy";
+}
+
+<br />
+<h2>Functionality</h2>
+<ol type="1">
+    <li>Unregistered user
+        <ul>
+            <li>Possibility to create account</li>
+            <li>Browse Books</li>
+            <li>Browse Authors</li>
+            <li>See Book Reviews</li>
+        </ul>
+    </li>
+    <li>
+        Registered user
+        <ul>
+            
+            <li>Browse Books</li>
+            <li>Browse Authors</li>
+            <li>See Book Reviews</li>
+            <li>Possibility to loan the book (every book can be loaned only once)</li>
+            <li>Possibility to write a review and edit it later</li>
+        </ul>
+    </li>
+    <li>
+        Admin
+        <ul>
+
+            <li>Browse Books</li>
+            <li>Browse Authors</li>
+            <li>See Book Reviews</li>
+            <li>Add Books, Authors and Book Categories</li>
+            <li>See Categories</li>
+        </ul>
+    </li>
+    
+</ol>
+<h2>Technologies</h2>
+<ul>
+    <li>Razor Pages</li>
+    <li>HTML, CSS</li>
+    <li>Bootstrap</li>
+    <li>C#</li>
+    <li>ASP.NET Core</li>
+    <li>PostgreSQL</li>
+    <li>Entity Framework</li>
+    <li>Cloudinary</li>
+
+</ul>
+<h2>Database</h2>
+<ul>
+    <li>One-to-many relationship
+        <ol>
+            <li>Author-Book</li>
+            <li>User-BookLoan</li>
+            <li>Book-BookReview</li>
+            <li>Book-BookCategory</li>
+        </ol>
+    </li>
+    <li>Many-to-many relationship
+        <ol>
+            <li></li>
+        </ol>
+    </li>
+</ul>

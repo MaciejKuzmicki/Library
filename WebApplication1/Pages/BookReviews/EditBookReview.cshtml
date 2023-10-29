@@ -1,0 +1,69 @@
+﻿@page
+@model WebApplication1.Pages.BookReviews.EditBookReviewModel
+
+@{
+    ViewData["Title"] = "Edit Book Review";
+}
+
+<main style="background-image: url('https://res.cloudinary.com/dxmsosoui/image/upload/v1697641274/vhszmrrgkdzdorvq4jxx.png');
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-position: center;
+                 width: 100%;
+                 opacity: 85%" ;>
+<div class="row" style="opacity:85%; padding:20px">
+    <div class="card mx-auto text-center col-lg-5" style="padding:20px; border-radius:20px">
+        <h2 class="text-center mb-5">Please, edit your opinion</h2>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookReview.ReviewId" />
+            
+            <div class="form-group">
+                <label asp-for="BookReview.ReviewText" class="control-label"></label>
+                <textarea asp-for="BookReview.ReviewText" style="border-radius:20px" class="form-control"></textarea>
+                <span asp-validation-for="BookReview.ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookReview.Rating" class="control-label"></label>
+                <select id="CountryOfOrigin" class="form-select" style="border-radius:20px" asp-for="BookReview.Rating">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <option value="@i" style="border-radius:20px">@i</option>
+                    }
+                </select>
+                <span asp-validation-for="BookReview.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="BookReview.UserId" class="control-label"></label>
+                <select asp-for="BookReview.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="BookReview.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="BookReview.BookId" class="control-label"></label>
+                <select asp-for="BookReview.BookId" class="form-control" asp-items="ViewBag.BookId"></select>
+                <span asp-validation-for="BookReview.BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="BookReview.ReviewDate" class="control-label"></label>
+                <input asp-for="BookReview.ReviewDate" class="form-control" />
+                <span asp-validation-for="BookReview.ReviewDate" class="text-danger"></span>
+            </div>
+            <br/ >
+            <div class="row mb-3">
+                <div class="col d-grid">
+                    <button type="submit" class="btn btn-outline-primary" style="border-radius:20px" href="/">Save</button>
+                </div>
+                <div class="col d-grid">
+                        <a class="btn btn-outline-secondary" href="/" style="border-radius:20px" role="button">Cancel</a>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
+</main>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

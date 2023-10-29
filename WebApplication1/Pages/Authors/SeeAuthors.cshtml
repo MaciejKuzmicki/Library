@@ -1,0 +1,38 @@
+﻿@page
+@model WebApplication1.Pages.Authors.SeeAuthorsModel
+
+@{
+    ViewData["Title"] = "Authors";
+}
+<body style="">
+<br />
+<div class="container">
+    <div class="card" style="border-radius:20px">
+        <h2 class=" display-5 fw-bold text-body-emphasis rounded text-center  p-3">Authors</h2>
+    </div>
+    <br />
+
+    <div class="row">
+        
+        <div class="col-lg-12">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-0">
+                @foreach (var item in Model.Author)
+                {
+                    <div class="card" style="width:18rem; padding:10px;margin:10px; border-radius:20px">
+                        <a href="/Authors/SeeAuthor?id=@(item.AuthorId)" style="text-decoration:none">
+                            <img src="@item.CloudinaryId" class="card-img-top" style="border-radius:20px" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-family:sans-serif; color:black">@item.FirstName @item.LastName</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">@item.CountryOfOrigin.Replace('_', ' ')</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</body>

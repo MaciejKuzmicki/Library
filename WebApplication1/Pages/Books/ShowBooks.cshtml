@@ -1,0 +1,65 @@
+﻿@page
+@model WebApplication1.Pages.Books.ShowBooksModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+<br />
+<div class="container">
+    <div class="card" style="border-radius:20px">
+        <h2 class=" display-5 fw-bold text-body-emphasis rounded text-center  p-3">Books</h2>
+    </div>
+    <br />
+    
+    <div class="row">
+        <div class="col-lg-3">
+            <form >
+                <div class="card" style="border-radius:20px">
+                    <div class="card-body">
+                        <h4 class="text-center">Search</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control form-control-lg" style="border-radius:30px" asp-for="Title" placeholder="Search by title">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select form-select-lg" style="border-radius:30px" asp-for="Category">
+                                <option value=""></option>
+                                @foreach (var category in Model.BookCategories)
+                                {
+                                    <option value="@category.CategoryName">@category.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-outline-primary btn-lg" style="border-radius:30px">Search</button>
+                        </div>
+                        <div class="d-grid">
+                            <a class="btn btn-outline-secondary btn-lg mt-2" style="border-radius:30px" href="/Books/ShowBooks" role="button">Clear</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-0">
+                @foreach (var item in Model.Book)
+                {
+                    <div class="card" style="width:18rem; padding:10px;margin:10px; border-radius:20px">
+                        <a href="/Books/ShowBook?id=@(item.BookId)" style="text-decoration:none">
+                            <img src="@item.CloudinaryImageId" class="card-img-top" style="border-radius:20px" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-family:sans-serif; color:black">@item.Title</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Author: @item.Author.FirstName @item.Author.LastName</li>
+                                    <li class="list-group-item">Year of publication: @item.PublicationYear</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

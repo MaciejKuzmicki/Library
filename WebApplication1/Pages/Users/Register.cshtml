@@ -1,0 +1,93 @@
+﻿@page
+@model WebApplication1.Pages.Users.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<main style="background-image: url('https://res.cloudinary.com/dxmsosoui/image/upload/v1697641274/vhszmrrgkdzdorvq4jxx.png');
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-position: center;
+                 width: 100%;
+                 opacity: 85%";>
+
+    <div class="row" style="opacity:85%">
+        <br />
+
+        <div class="card mx-auto text-center col-lg-5" style="padding:20px; border-radius:20px; margin:40px">
+        <h2 class="text-center mb-5">Please, enter your data</h2>
+            @if (Model.errorMessage.Length > 0)
+            {
+                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>@Model.errorMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            }
+        <form method="post">
+           
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input class="form-control" style="border-radius:20px" asp-for="User.FirstName" placeholder="Enter your name" />
+            <span asp-validation-for="User.FirstName" class="text-danger"></span>
+            <br />
+            <input class="form-control" style="border-radius:20px" asp-for="User.LastName" placeholder="Enter your surname" />
+            <span asp-validation-for="User.LastName" class="text-danger"></span>
+            <br />
+            <input class="form-control" style="border-radius:20px" asp-for="User.Email" placeholder="Enter your e-mail" />
+            <span asp-validation-for="User.Email" class="text-danger"></span>
+            <br />
+            <input class="form-control" style="border-radius:20px" asp-for="User.Password" type="password" placeholder="Enter your password" />
+            <span asp-validation-for="User.Password" class="text-danger"></span>
+            <br />
+            
+            <input class="form-control" style="border-radius:20px" asp-for="User.PhoneNumber" placeholder="Enter your phone number" />
+            <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+            <br />
+            <div class="row mb-3">
+                <div class="col d-grid">
+                    <button type="submit" class="btn btn-outline-primary" style="border-radius:20px" href="/Index">Register</button>
+                </div>
+                <div class="col d-grid">
+                    <a asp-page="/Index" class="btn btn-outline-secondary" style="border-radius:20px">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-lg-5" >
+        <br/>
+
+        <div class="card" style="border-radius:20px; max-height:200px; margin:20px">
+            <div class="card-body">
+                <h5>Reasons to have an account</h5>
+                <ul class="list-group-flush list-group" style="">
+                    <li class="list-group-item" style="">Possibility to borrow a book</li>
+                    <li class="list-group-item" style="">Possibility to watch your past loans</li>
+                    <li class="list-group-item" style="">Possibility to set an opinion about book</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="card" style="border-radius:20px; margin:20px">
+            <div class="card-body">
+                <h5 class="text-center">Already have an account ?</h5>
+                <br />
+                <div class="d-grid">
+                    <a class="btn btn-outline-primary" style="align-content:center; border-radius:20px" asp-area="" asp-page="/Users/Login">Login now!</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

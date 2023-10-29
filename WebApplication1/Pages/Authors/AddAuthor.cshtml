@@ -1,0 +1,67 @@
+﻿@page
+@model WebApplication1.Pages.Authors.AddAuthorModel
+
+@{
+    ViewData["Title"] = "AddAuthor";
+}
+
+<body style="background-image: url('https://res.cloudinary.com/dxmsosoui/image/upload/v1697641274/vhszmrrgkdzdorvq4jxx.png');
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-position: center;
+                 width: 100%;
+				 opacity: 85%" ;>
+<hr />
+<div class="row">
+
+        <div class="card mx-auto text-center col-lg-5" style="padding:20px; border-radius:20px">
+            <h2 class="text-center mb-5">Please, enter your data</h2>
+            <form method="post" enctype="multipart/form-data">
+                @if (Model.errorMessage.Length > 0)
+                {
+                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                        <strong>@Model.errorMessage</strong>
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>
+                }
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input class="form-control" style="border-radius:20px" asp-for="Author.FirstName" placeholder="Enter author name" />
+                <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+                <br />
+                <input class="form-control" style="border-radius:20px" asp-for="Author.LastName" placeholder="Enter author surname" />
+                <span asp-validation-for="Author.LastName" class="text-danger"></span>
+                <br />
+                <textarea class="form-control" style="border-radius:20px" asp-for="Author.Biography" placeholder="Enter author biography"></textarea>
+                <span asp-validation-for="Author.Biography" class="text-danger"></span>
+                
+                <br />
+                <select id="CountryOfOrigin" class="form-select" style="border-radius:20px" asp-for="Author.CountryOfOrigin">
+                    @foreach(var item in Model.countryList) {
+                    <option value="@item" style="border-radius:20px">@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Author.CountryOfOrigin" class="text-danger"></span>
+                <br />
+                <input class="form-control" type="file" id="Photo" style="border-radius:20px" asp-for="Photo" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+                <br />
+                <div class="row mb-3">
+                    <div class="col d-grid">
+                        <button type="submit" class="btn btn-outline-primary" style="border-radius:20px" href="/">Add Author</button>
+                    </div>
+                    <div class="col d-grid">
+                        <a asp-page="/" style="border-radius:20px" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

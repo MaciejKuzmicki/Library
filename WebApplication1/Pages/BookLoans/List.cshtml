@@ -1,0 +1,75 @@
+﻿@page
+@model WebApplication1.Pages.BookLoans.ListModel
+
+@{
+    ViewData["Title"] = "My Book Loans";
+}
+<h1 class="display-2" style="text-align:center;margin: 0 auto">Current Loans</h1>
+<hr class="featurette-divider">
+
+@foreach(var item in Model.BookLoanCurrent)
+{
+    <div class="card mb-3" style="max-width: 810px;text-align:center;margin: 0 auto;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="@item.Book.CloudinaryImageId" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <h3 class="card-title">@item.Book.Title</h3>
+                        <li class="card-text list-group-item">Book Author: @item.Book.Author.FirstName @item.Book.Author.LastName</li>
+                    <li class="card-text list-group-item">Loan date: @item.LoanDate</li>
+                        
+
+                </ul>
+                <br/>
+                <form method="post" name="value" asp-route-id="@item.BookLoanId">
+                        <button type="submit" name="handler" value="handler" style="border-radius:30px" class="btn btn-outline-secondary btn-lg mt-2" style="bottom:auto">Return the book</button>
+                </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+}
+<hr class="featurette-divider">
+<h1 class="display-2" style="text-align:center;margin: 0 auto;">Past Loans</h1>
+<hr class="featurette-divider">
+
+@foreach (var item in Model.BookLoanPast)
+{
+    <div class="card mb-3" style="max-width: 810px;text-align:center;margin: 0 auto;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@item.Book.CloudinaryImageId" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <h3 class="card-title">@item.Book.Title</h3>
+                        <li class="card-text list-group-item">Book Author: @item.Book.Author.FirstName @item.Book.Author.LastName</li>
+                        <li class="card-text list-group-item">Loan date: @item.LoanDate</li>
+                        <li class="card-text list-group-item">Return date: @item.ReturnDate</li>
+
+
+                    </ul>
+                    @if (Model.BookReviews.FirstOrDefault(b => b.UserId == Model.user.UserId && b.BookId == item.BookId) == null)
+                    {
+                        <a class="btn btn-outline-secondary btn-lg mt-2" style="border-radius:30px" href="/BookReviews/AddBookReview?id=@(item.BookLoanId)" role="button">Add Review</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-secondary btn-lg mt-2" style="border-radius:30px" href="/BookReviews/EditBookReview?id=@(Model.BookReviews.FirstOrDefault(b => b.UserId == Model.user.UserId && b.BookId == item.BookId).ReviewId)" role="button">Edit Review</a>
+                    }
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

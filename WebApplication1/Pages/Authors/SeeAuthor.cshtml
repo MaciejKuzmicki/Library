@@ -1,0 +1,47 @@
+﻿@page
+@model WebApplication1.Pages.Authors.SeeAuthorModel
+
+@{
+    ViewData["Title"] = Model.Author.FirstName + " " + Model.Author.LastName;
+}
+
+<div class="card mb-3" style="">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Model.Author.CloudinaryId" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h1 class="card-title">@Model.Author.FirstName @Model.Author.LastName</h1>
+                <p class="card-text">@Model.Author.CountryOfOrigin</p>
+                <p class="card-text">@Model.Author.Biography</p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="featurette-divider">
+
+<h1 class="display-4 fw-bold text-body text-center">Books</h1>
+<hr class="featurette-divider">
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-0 text-center">
+
+    @foreach (var item in Model.Author.Books)
+    {
+
+        <div class="card" style="width:19rem; padding:10px;margin:10px; border-radius:20px">
+            <a href="/Books/ShowBook?id=@(item.BookId)" style="text-decoration:none">
+                <img src="@item.CloudinaryImageId" class="card-img-top" style="border-radius:20px" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family:sans-serif; color:black">@item.Title</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Author: @item.Author.FirstName @item.Author.LastName</li>
+                        <li class="list-group-item">Year of publication: @item.PublicationYear</li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+    }
+</div>

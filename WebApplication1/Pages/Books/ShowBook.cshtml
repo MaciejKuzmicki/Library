@@ -1,0 +1,117 @@
+﻿@page
+@model WebApplication1.Pages.Books.ShowBookModel
+
+@{
+    ViewData["Title"] = Model.Book.Title;
+}
+<br/>
+<div class="card" style="border-radius:20px">
+    <div class="row" style="padding:10px">
+        <div class="col-lg-5">
+            <img src="@Model.Book.CloudinaryImageId" class="img-fluid" alt="Item Image" style="border-radius:20px; max-height:600px">
+        </div>
+        <div class="col-lg-7">
+            <h2 class="display-4 fw-bold text-body" style="font-family:sans-serif; font-weight:bold;">@Model.Book.Title</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item fontItem">Author: @Model.Book.Author.FirstName @Model.Book.Author.LastName</li>
+                <li class="list-group-item fontItem">Year of publication: @Model.Book.PublicationYear</li>
+                <li class="list-group-item fontItem">ISBN: @Model.Book.ISBN</li>
+                <li class="list-group-item fontItem">
+                    
+                    <ul class="list-inline">
+                        <div class="d-flex gap-2">
+                        <li class="list-inline-item">Categories:</li>
+                        @foreach (var category in Model.Book.Categories)
+                        {
+                            <a class="btn btn-outline-secondary rounded-pill px-1" style="text-decoration:none" href="/Books/ShowBooks?Title=&Category=@(category.CategoryName)">@category.CategoryName</a>
+                        }
+                        </div>
+                    </ul>
+                </li>
+
+                @if(Model.Book.AvailableCopies == 1)
+                {
+                    <li class="list-group-item fontItem">Available: Yes</li>
+                }
+                else
+                {
+                    <li class="list-group-item fontItem">Available: No</li>
+                }
+                <li class="list-group-item fontItem">
+                    <form method="post">
+                        @if (Model.role == "client" && Model.Book.AvailableCopies == 1 && Model.wasLoaned.Equals(false))
+                        {
+                            <button type="submit" name="handler" value="handler1" class="btn btn-outline-primary" style="border-radius:20px; position:relative;">Loan the book</button>
+                            <input type="hidden" name="someValue" value="@Model.SomeValue" />
+                        }
+                    </form>
+
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    
+</div>
+<br/>
+<hr class="featurette-divider">
+<h2 class="display-5 text-center fw-bold text-body">Description</h2>
+
+<hr class="featurette-divider">
+    <div class="row">
+        <p class="fw-bold">@Model.Book.BookDescription</p>
+    </div>
+<br/>
+<hr class="featurette-divider">
+<h2 class="display-5 text-center fw-bold text-body">Reviews</h2>
+@if (Model.Book.Reviews.Count == 0)
+{
+    <hr class="featurette-divider">
+
+    <p class="fw-bold">There is no review yet! Be the first one to rate the book!</p>
+
+
+}
+else {
+    @foreach (var review in Model.Book.Reviews)
+    {
+        <hr class="featurette-divider">
+        <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+            </div>
+            <div>
+                
+                <h3 class="fs-2 text-body-emphasis">@review.User.FirstName @review.User.LastName</h3>
+                @for (int i = 0; i < review.Rating; i++)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                }
+                @for (int i = 5; i > review.Rating; i--)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                    </svg>
+                }
+                <br/>
+
+                <br/>
+                <p class="small">@review.ReviewDate.Day.@review.ReviewDate.Month.@review.ReviewDate.Year</p>
+                <p>@review.ReviewText</p>
+
+            </div>
+            
+        </div>
+    }
+}
+
+        
+        
+
+
+

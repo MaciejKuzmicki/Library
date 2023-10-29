@@ -1,0 +1,48 @@
+﻿@page
+@model WebApplication1.Pages.BookReviews.AddBookReviewModel
+
+@{
+    ViewData["Title"] = "Add Book Review";
+}
+<main style="background-image: url('https://res.cloudinary.com/dxmsosoui/image/upload/v1697641274/vhszmrrgkdzdorvq4jxx.png');
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-position: center;
+                 width: 100%;
+                 opacity: 85%" ;>
+    >
+<div class="row" style="opacity:85%; padding:20px;">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="card mx-auto text-center col-lg-5" style="padding:20px; border-radius:20px">
+            <h2 class="text-center mb-5">Please, leave your opinion</h2>
+            <form method="post" enctype="multipart/form-data">
+                <textarea class="form-control" style="border-radius:20px" asp-for="@Model.Opinion" placeholder="Enter your opinion"></textarea>
+                <span asp-validation-for="@Model.Opinion" class="text-danger"></span>
+                <br />
+                <select id="CountryOfOrigin" class="form-select" style="border-radius:20px" asp-for="@Model.Rating">
+                    @for(int i = 1; i <=5; i++)
+                    {
+                        <option value="@i" style="border-radius:20px">@i</option>
+                    }
+                </select>
+                <br/>
+                <div class="row mb-3">
+                    <div class="col d-grid">
+                        <button type="submit" class="btn btn-outline-primary" style="border-radius:20px" href="/">Add Review</button>
+                    </div>
+                    <div class="col d-grid">
+                        <a class="btn btn-outline-secondary" href="/" style="border-radius:20px" role="button">Cancel</a>
+                    </div>
+                </div>
+            <input type="hidden" name="someValue" value="@Model.SomeValue" />
+
+            </form>
+
+        </div>
+</div>
+</main>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

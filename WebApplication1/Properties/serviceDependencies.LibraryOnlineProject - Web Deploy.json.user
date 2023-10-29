@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2023-10-28T21:16:42.9580231Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "8dd15913-c570-477d-897a-87dd8ab255d9"
+    },
+    "LibraryOnlineProject.resourceGroupName": {
+      "Name": "LibraryOnlineProject.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "LibraryOnlineProject"
+    },
+    "LibraryOnlineProject.resourceGroupLocation": {
+      "Name": "LibraryOnlineProject.resourceGroupLocation",
+      "Type": null,
+      "Value": "eastus"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "LibraryOnlineProject"
+    },
+    "LibraryOnlineProject.resourceName": {
+      "Name": "LibraryOnlineProject.resourceName",
+      "Type": null,
+      "Value": "LibraryOnlineProject"
+    },
+    "LibraryOnlineProject.subscriptionId": {
+      "Name": "LibraryOnlineProject.subscriptionId",
+      "Type": "subscription",
+      "Value": "8dd15913-c570-477d-897a-87dd8ab255d9"
+    }
+  }
+}
