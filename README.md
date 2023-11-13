@@ -57,5 +57,20 @@
             <li>See Categories</li>
         </ul>
     </li>
-    
 </ol>
+
+# Screenshots
+
+<ul>
+  <li>Main View</li>
+  <br />
+  <img src="WebApplication1/Images/MainView.png" alt="Library Image" style="max-width: 100%; height: auto;">
+  <li>Book Description and Reviews View</li>
+  <br />
+    <img src="WebApplication1/Images/BookDescription.png" alt="Description" style="max-width: 100%; height: auto;">
+  <li>Books View</li>
+  <br />
+    <img src="WebApplication1/Images/BooksView.png" alt="Books" style="max-width: 100%; height: auto;">
+    <br/>
+
+</ul>
